@@ -265,7 +265,7 @@
   </style>
 </head>
 <body>
-  <a href="https://glctrk.org/aff_c?offer_id=3117&aff_id=4344&source=valensurvthird" id="redirect-link" style="display:none;"></a>
+  <a href="#" id="redirect-link" style="display:none;"></a>
   
   <main>
     <div class="card">
@@ -287,7 +287,7 @@
       
       <!-- Step 2 -->
       <div id="step2" class="hidden">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Lululemon_Athletica_logo.svg/2048px-Lululemon_Athletica_logo.svg.png" alt="Lululemon Logo" class="logo">
+        <img src="https://1000logos.net/wp-content/uploads/2017/08/Lululemon-Logo.png" alt="Lululemon Logo" class="logo">
         
         <div class="amount-section">
           <div class="amount">$700.00</div>
@@ -314,7 +314,7 @@
           </div>
         </div>
         
-        <a href="https://glctrk.org/aff_c?offer_id=3117&aff_id=4344&source=valensurvthird" class="btn btn-orange">Get Your $700 →</a>
+        <a href="#" id="offer-btn" class="btn btn-orange">Get Your $700 →</a>
         
         <div class="trustpilot">
           <span class="trust-text">Excellent 4.5/5</span>
@@ -340,16 +340,33 @@
   </footer>
   
   <script>
+    const params = new URLSearchParams(window.location.search);
+    const source = params.get("source") || "default";
+    const offerBase = "https://giftclick.org/aff_c?offer_id=3117&aff_id=4344";
+
+    function buildOfferUrl() {
+      const separator = offerBase.includes("?") ? "&" : "?";
+      return offerBase + separator + "source=" + encodeURIComponent(source);
+    }
+
+    function updateOfferLinks() {
+      const finalUrl = buildOfferUrl();
+      const redirectLink = document.getElementById("redirect-link");
+      const offerBtn = document.getElementById("offer-btn");
+
+      if (redirectLink) redirectLink.href = finalUrl;
+      if (offerBtn) offerBtn.href = finalUrl;
+    }
+
     function goToStep2() {
       const select = document.getElementById('device-select');
       if (select.value) {
         document.getElementById('step1').classList.add('hidden');
         document.getElementById('step2').classList.remove('hidden');
-        setTimeout(() => {
-          document.getElementById('progress2').style.width = '77%';
-        }, 100);
       }
     }
+
+    updateOfferLinks();
   </script>
 </body>
 </html>
